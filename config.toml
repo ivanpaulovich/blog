@@ -6,9 +6,10 @@ title = "Paulovich.NET"
 theme = "hyde-hyde"
 
 ## Hugo Built-in Features
-# disqusShortname = "your-disqus-shortname"
-# googleAnalytics = "your-google-analytics-id"
-# enableRobotsTXT = true
+disqusShortname = "paulovichdotnet"
+googleAnalytics = "UA-27176166-1"
+enableRobotsTXT = true
+comments = true
 
 # summarylength = 30
 
