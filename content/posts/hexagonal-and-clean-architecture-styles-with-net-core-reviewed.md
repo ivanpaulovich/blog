@@ -56,7 +56,11 @@ Let's see how I applied this principle in the next example: ![](/static/DIP-1-2.
 *   The IAccountRepository is the **abstraction** that do not depend on database details.
 *   The AccountSQLRepository is the **low-level module** that depends on IAccountRepository abstraction.
 
-The following listing of DepositUseCase with DIP: That is the main idea behind Hexagonal Architecture, whenever our application requires an external service we use the Port (a simple interface) and we implement the Adapter behind the abstraction.
+The following listing of DepositUseCase with DIP: 
+
+<script src="https://gist.github.com/ivanpaulovich/d8050e2bc3d02a8fcca011d6d17f4831.js"></script>
+
+That is the main idea behind Hexagonal Architecture, whenever our application requires an external service we use the Port (a simple interface) and we implement the Adapter behind the abstraction.
 
 ### **Separation of Concerns** (SoC)
 
@@ -117,7 +121,13 @@ Now we advance to the next layer, at the User Interface Layer we translate the i
 *   **Presenter**: it converters the Output to the Model.
 *   **Model**: this is the return data structure for MVC applications.
 
-We must highlight that the Controller knows the Deposit Use Case and it is not interested about the Output, instead the Controller delegates the responsibility of generating a Model to the Presenter instance. An Presenter class is detailed bellow and it shows a conversion from the DepositOutput to two different ViewModels. One ViewModel for null Outputs and another ViewModel for successful deposits.
+We must highlight that the Controller knows the Deposit Use Case and it is not interested about the Output, instead the Controller delegates the responsibility of generating a Model to the Presenter instance. 
+
+<script src="https://gist.github.com/ivanpaulovich/7bef3a9745f181757c8fbb1f009ac079.js"></script>
+
+An Presenter class is detailed bellow and it shows a conversion from the DepositOutput to two different ViewModels. One ViewModel for null Outputs and another ViewModel for successful deposits.
+
+<script src="https://gist.github.com/ivanpaulovich/21c175748c960a844c6165167be267ff.js"></script>
 
 Adapters for the Infrastructure
 -------------------------------
@@ -127,12 +137,22 @@ Another external layer is the Infrastructure Layer that implements Data Access,
 How and When the DI is configured
 ---------------------------------
 
-We group the DI by Modules, so we have an module for the Entity Framework Data Access that requires a connection string like this: There is others modules in the same code base and we can run using them by changing the **autofac.entityframework.json**, an convenient way to setup desired modules. The autofac.json in set on the very beginning in the Program.cs. As it should be!
+We group the DI by Modules, so we have an module for the Entity Framework Data Access that requires a connection string like this: 
+
+<script src="https://gist.github.com/ivanpaulovich/b2e66b47612faf1a95ea23b70e772394.js"></script>
+
+There is others modules in the same code base and we can run using them by changing the **autofac.entityframework.json**, an convenient way to setup desired modules. 
+
+<script src="https://gist.github.com/ivanpaulovich/0a0eb90cb0aefda9d5ab497159f5ac46.js"></script>
+
+The autofac.json in set on the very beginning in the Program.cs. As it should be!
 
 Source Code
 -----------
 
 You can download the source code on [Clean Architecture](https://github.com/ivanpaulovich/clean-architecture-manga) github repository or through the following commands:
+
+<script src="https://gist.github.com/ivanpaulovich/3b5ca9b2b49991a5254f03ec1ffae70f.js"></script>
 
 Conclusion
 ----------

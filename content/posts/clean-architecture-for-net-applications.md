@@ -10,13 +10,15 @@ aliases = [
 +++
 I'd like to introduce my service template for .NET Applications based on the Clean Architecture style. You can download the full [source code](https://github.com/ivanpaulovich/manga-clean-architecture) or you can play with the [dotnet new caju](https://github.com/ivanpaulovich/dotnet-new-caju) tool using the following commands:
 
+```
 $ dotnet new -i Paulovich.Caju::0.4.0
-$ dotnet new clean \\
-  --data-access mongo \\
-  --use-cases full \\
+$ dotnet new clean \
+  --data-access mongo \
+  --use-cases full \
   --user-interface webapi
+```
 
-As the SOLID principles and the Clean Architecture rules are worth to write about it, I am starting this blogging series explaining the decisions we have made through the development of the Manga Project. Feedback are welcome! Clean Architecture [expects at least 4 layers](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html) and in each layer there are common components. Starting with the layers from inside to the outer ones: \[caption id="attachment\_168" align="alignnone" width="721"\][![Clean Architecture Diagram by Uncle Bob](/static/CleanArchitecture-Uncle-Bob.jpg)](/static/CleanArchitecture-Uncle-Bob.jpg) Clean Architecture Diagram by Uncle Bob\[/caption\]
+As the SOLID principles and the Clean Architecture rules are worth to write about it, I am starting this blogging series explaining the decisions we have made through the development of the Manga Project. Feedback are welcome! Clean Architecture [expects at least 4 layers](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html) and in each layer there are common components. Starting with the layers from inside to the outer ones: [![Clean Architecture Diagram by Uncle Bob](/static/CleanArchitecture-Uncle-Bob.jpg)](/static/CleanArchitecture-Uncle-Bob.jpg) 
 
 1.  Enterprise Business Rules
 2.  Application Business Rules
@@ -37,6 +39,7 @@ Beginning with the Enterprise Business Rules Layer we are talking about Aggregat
 
 You can find interesting Domain Entities in our GitHub, following there are an Aggregate Root example:
 
+```
 public class Customer : Entity, IAggregateRoot
 {
     public virtual Name Name { get; protected set; }
@@ -62,6 +65,7 @@ public class Customer : Entity, IAggregateRoot
         Accounts.Add(accountId);
     }
 }
+```
 
 **2\. Application Business Rules**
 ----------------------------------
@@ -89,6 +93,7 @@ In our example application we have other Use Cases that allow Customer Registrat
 
 Continuing to explore our implementation you will see that the **RegisterInteractor** receives the services by DI. The Process method does the Application Business Rules, calls the Repository and at the end passes the **RegisterOutput** through the **RegisterPresenter** instance. Let's take a look at the RegisterInteractor class:
 
+```
 public class RegisterInteractor : IInputBoundary
 {
     private readonly ICustomerWriteOnlyRepository customerWriteOnlyRepository;
@@ -128,6 +133,7 @@ public class RegisterInteractor : IInputBoundary
         outputBoundary.Populate(output);
     }
 }
+```
 
 What have you seen until here is **Enterprise + Application Business Rules** enforced without frameworks dependencies or without database coupling. Every details have abstractions protecting the Business Domain to be coupled to tech stuff.
 
@@ -143,7 +149,8 @@ Now we advance to the next layer, at the Interface Adapters Layer we translate t
 
 And this is how looks a Controller for the Register Use Case. We must highlight that the Controller knows which Interactor to call but it does not care about the Output of it, instead the Controller delegates the responsibility of generating a Model to the Presenter instance.
 
-\[Route("api/\[controller\]")\]
+```
+[Route("api/[controller]")]
 public class CustomersController : Microsoft.AspNetCore.Mvc.Controller
 {
     private readonly IInputBoundary<RegisterInput> registerInput;
@@ -160,8 +167,8 @@ public class CustomersController : Microsoft.AspNetCore.Mvc.Controller
     /// <summary>
     /// Register a new Customer
     /// </summary>
-    \[HttpPost\]
-    public async Task<IActionResult> Post(\[FromBody\]RegisterRequest message)
+    [HttpPost]
+    public async Task<IActionResult> Post([FromBody]RegisterRequest message)
     {
         var request = new RegisterInput(
            message.PIN, message.Name, message.InitialAmount);
@@ -169,9 +176,11 @@ public class CustomersController : Microsoft.AspNetCore.Mvc.Controller
         return registerPresenter.ViewModel;
     }
 }
+```
 
 An Presenter class is detailed bellow and it shows a conversion from the RegisterOutput to two different ViewModels. One ViewModel for null Outputs and another ViewModel for successful registrations.
 
+```
 public class Presenter : IOutputBoundary<RegisterOutput>
 {
     public IActionResult ViewModel { get; private set; }
@@ -219,12 +228,14 @@ public class Presenter : IOutputBoundary<RegisterOutput>
             model);
     }
 }
+```
 
 **4\. Frameworks & Drivers**
 ----------------------------
 
 Our more external layer is the Frameworks & Drivers who implements Data Base Access, Dependency Injection Framework (DI), JSON Serializer and technology specific stuff. It has an CustomerRepository implementation. See the GitHub for the MongoContext and other Repositories classes.
 
+```
 public class CustomerRepository : ICustomerReadOnlyRepository, ICustomerWriteOnlyRepository
 {
     private readonly Context mongoContext;
@@ -255,9 +266,11 @@ public class CustomerRepository : ICustomerReadOnlyRepository, ICustomerWriteOnl
             .ReplaceOneAsync(e => e.Id == customer.Id, customer);
     }
 }
+```
 
 We group the DI by Autofac Modules and created rules for selecting the interfaces and implementations by namespace patterns.
 
+```
 public class InfrastructureModule : Autofac.Module
 {
     public string ConnectionString { get; set; }
@@ -279,12 +292,14 @@ public class InfrastructureModule : Autofac.Module
             .InstancePerLifetimeScope();
     }
 }
+```
 
 And finally everything is tied together with configurations in the **autofac.json** which also makes possible to change implementations easily:
 
+```
 {
   "defaultAssembly": "Manga.Infrastructure",
-  "modules": \[
+  "modules": [
     {
       "type": "Manga.Infrastructure.Modules.WebApiModule",
       "properties": {
@@ -302,14 +317,17 @@ And finally everything is tied together with configurations in the **autofac.jso
         "DatabaseName": "Manga-V01"
       }
     }
-  \]
+  ]
 }
+```
 
 Summing up, we separated the Solution in projects so we could draw boundaries between the modules, clarify the dependencies and we have small classes that makes easy to create new features without changing the existing ones. These are the Solution Explorer in Visual Studio 2017: [![](/static/Manga-Solution-Explorer.png)](/static/Manga-Solution-Explorer.png) And to help you understand the dependencies between the projects this diagram: [![](/static/Layers.png)](/static/Layers.png) Finally, as we did not cover every detail in source code take a look at.
 
+```
 git clone https://github.com/ivanpaulovich/manga.git
 cd manga/source/WebAPI/Manga.WebApi
 dotnet run
+```
 
 Or by: [![](/static/dotnet-new-caju-0.2.84.gif)](/static/dotnet-new-caju-0.2.84.gif) I hope that this template could improve your productivity in building applications with evolutionary architecture.
 

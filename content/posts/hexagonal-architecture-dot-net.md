@@ -63,6 +63,7 @@ To clarify the idea I created the next picture with the before and after applyin
 
 ![](/static/DIP-Dependecy-Inversion-Principle-1.png) The following listing of DepositService shows an implementation. Suggestion: clone the [Acerola repo](https://github.com/ivanpaulovich/acerola-hexagonal-architecture) for the full implementation.
 
+```
 public class DepositService : IDepositService
 {
   private readonly IAccountReadOnlyRepository accountReadOnlyRepository;
@@ -99,6 +100,7 @@ public class DepositService : IDepositService
     return result;
   }
 }
+```
 
 That is the main idea behind Hexagonal Architecture, every time our application requires an external service we implement adapter behind an abstraction.
 
@@ -164,10 +166,12 @@ With this approach we have an application design that supports new use case impl
 
 For the Query side, in the Application Layer we have only an small interface. And in the Infrastructure Layer we have the Adapter implementation.
 
+```
 public interface IAccountsQueries
 {
   Task<AccountResult> GetAccount(Guid id);
 }
+```
 
 By having an guarantee that the query side does not make changes in state. We can take advantage of better solutions for reading. For instance we can use caching, segregated databases to boost performance and it could be done inside the Adapter.
 
@@ -176,7 +180,8 @@ Ports
 
 A Port is an way an Actor can interact with the Application Layer. The role of the Port is to translate the Actor's input into structures the Application Services can understand. For instance a Port could be an Web Form, an Console App or another system. For this article the Port supports the REST protocol and was implemented using WebApi framework.
 
-\[Route("api/\[controller\]")\]
+```
+[Route("api/[controller]")]
 public class AccountsController : Controller
 {
   private readonly IDepositService depositService;
@@ -190,7 +195,7 @@ public class AccountsController : Controller
   /// <summary>
   /// Deposit from an account
   /// </summary>
-  \[HttpPatch("Deposit")\]
+  [HttpPatch("Deposit")]
   public async Task<IActionResult> Deposit(\[FromBody\]DepositRequest request)
   {
     var command = new DepositCommand(
@@ -214,6 +219,7 @@ public class AccountsController : Controller
     return new ObjectResult(model);
   }
 }
+```
 
 The WebApi has Controllers that do not depends on Application Services implementation, its easy to mock this services.
 
@@ -230,11 +236,13 @@ Source Code
 
 You can download the source code on [Acerola GitHub repository](https://github.com/ivanpaulovich/acerola-hexagonal-architecture) or through the following commands:
 
+```
 dotnet new -i Paulovich.Caju::0.5.0
-dotnet new hexagonal \\
-  --data-access entityframework \\
-  --use-cases full \\
+dotnet new hexagonal \
+  --data-access entityframework \
+  --use-cases full \
   --user-interface webapi
+```
 
 Conclusion
 ----------

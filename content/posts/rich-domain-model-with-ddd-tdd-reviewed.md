@@ -27,7 +27,11 @@ It’s the use of primitive types like string, integer or arrays to ensure the f
 *   When a client class needs to manipulate arrays of other classes in order to keep the data and policies consistent. At first having methods to manipulate arrays everywhere (eg. linq) seems an advantage. Then the different places do not implement in the same way, or you need a big effort to maintain it consistent.
 *   The generic arrays and collections leaks abstraction, they provide access to language specific methods instead of the methods known by the ubiquitous language.
 
+<script src="https://gist.github.com/ivanpaulovich/0836d7d7a4b41b4fa44240b5ab643375.js"></script>
+
 To fix this issue we need to create a value object that encapsulate the fine grained business logic and for collections we should use the adapter pattern with the proper methods to manipulate the items.
+
+<script src="https://gist.github.com/ivanpaulovich/0dd5df2132bf247e9590b36a59a3dda0.js"></script>
 
 ### Public Setters Abuse
 
@@ -80,9 +84,15 @@ We warn you that our model are persistent ignorant, it privileges the business a
 
 We point out that the Customer and Account are aggregate roots and they only know each other by their IDs. The Customer.Register(..) method does not accept the Account instance, instead accepts only the AccountId.
 
+<script src="https://gist.github.com/ivanpaulovich/79d405a602685bb2e8468aa6dd00f42b.js"></script>
+
 #### Customer.cs
 
-All fields are private set so all the state changes are made by the methods, the specific Accounts property return an IReadOnlyCollection to prevent unexpected changes from consumers. In this class the state consistent from the constructor that requires the customer details to the Register(..) method. Previously, I said that I would not corrupt the Model in order to persist the entities state. I made and exception for the factory method that receives the complete Customer fields then it creates a Customer instance. To persist the objects graph the repository can read the public properties.
+All fields are private set so all the state changes are made by the methods, the specific Accounts property return an IReadOnlyCollection to prevent unexpected changes from consumers. In this class the state consistent from the constructor that requires the customer details to the Register(..) method. Previously, I said that I would not corrupt the Model in order to persist the entities state. I made and exception for the factory method that receives the complete Customer fields then it creates a Customer instance.
+
+<script src="https://gist.github.com/ivanpaulovich/5d3f702a55a4700dd23a272a2dca5617.js"></script>
+
+To persist the objects graph the repository can read the public properties.
 
 #### Account.cs
 
@@ -94,18 +104,24 @@ I added the sealed modifier to the Account class to prevent inheritance. I am an
 
 The consistency is ensured by not allowing the client to make changes on the TransactionCollection property.
 
+<script src="https://gist.github.com/ivanpaulovich/21ca4c7b445764adcfc676c503a13348.js"></script>
+
 #### SSN.cs
 
 This class is a value object for the Swedish Personnummer and it encapsulates the complexity of validating the string format. Whenever I refer to a string personnummer I can use this class.
+
+<script src="https://gist.github.com/ivanpaulovich/6c7776aaff93e29e21ec3e037c9df2e9.js"></script>
 
 Source Code
 -----------
 
 There are more examples of Rich Domain in my GitHub repository. You can find the Aggregates, Entities and the Values objects. Also everything is covered by Unit Tests. The source code is available on GitHub [DDD/TDD Rich Domain](https://github.com/ivanpaulovich/ddd-tdd-rich-domain).
 
+```
 git clone https://github.com/ivanpaulovich/ddd-tdd-rich-domain.git
 cd ddd-tdd-rich-domain
 ./build.sh
+```
 
 Give it a stargazer, fork it if you like.
 
