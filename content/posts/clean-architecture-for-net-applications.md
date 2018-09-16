@@ -4,6 +4,9 @@ date = 2018-05-15T06:12:52+02:00
 tags = []
 featured_image = ""
 description = ""
+aliases = [
+    "/clean-architecture-for-net-applications/"
+]
 +++
 I'd like to introduce my service template for .NET Applications based on the Clean Architecture style. You can download the full [source code](https://github.com/ivanpaulovich/manga-clean-architecture) or you can play with the [dotnet new caju](https://github.com/ivanpaulovich/dotnet-new-caju) tool using the following commands:
 

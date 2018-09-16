@@ -4,6 +4,9 @@ date = 2018-05-22T06:12:52+02:00
 tags = []
 featured_image = ""
 description = ""
+aliases = [
+    "/architecture-templates-for-dotnet-new/"
+]
 +++
 I am releasing an new version of my [Architecture Templates for dotnet new](https://dotnetnew.azurewebsites.net/pack/Paulovich.Caju). We are working on testing, compatibility and documentation.
 
