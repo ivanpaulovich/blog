@@ -61,7 +61,7 @@ To clarify the idea I created the next picture with the before and after applyin
 *   On the left side of the next picture we find in blue an Layered Application where the DepositService depends on AccountSQLRepository.
 *   And on the right side in green, by adding an IAccountRepository and applying DIP then the AccountSQLRepository has your dependency pointing inwards.
 
-![](https://paulovich.net/wp-content/uploads/2018/04/DIP-Dependecy-Inversion-Principle-1.png) The following listing of DepositService shows an implementation. Suggestion: clone the [Acerola repo](https://github.com/ivanpaulovich/acerola-hexagonal-architecture) for the full implementation.
+![](/static/DIP-Dependecy-Inversion-Principle-1.png) The following listing of DepositService shows an implementation. Suggestion: clone the [Acerola repo](https://github.com/ivanpaulovich/acerola-hexagonal-architecture) for the full implementation.
 
 public class DepositService : IDepositService
 {
@@ -117,7 +117,7 @@ With this style we have:
 *   Adapters providing implementations of frameworks and access to databases.
 *   Externally the user, other systems and services.
 
-One way to explain the Hexagonal Architecture is by its shapes. Take a look at the following picture: ![](https://paulovich.net/wp-content/uploads/2018/04/hexagonal-1.png)  
+One way to explain the Hexagonal Architecture is by its shapes. Take a look at the following picture: ![](/static/hexagonal-1.png)  
 
 *   The blue potato shape at the center is the Domain and there are reasons for it. Every business domain has its own rules, different specifications from each other, that is the reason of its undefined shape. For instance, I designed our Domain Layer with DDD Patterns.
 *   The application has an hexagonal shape because each of its sides has specifics protocols, in our example we have **Commands** and **Queries** giving access to the Application.
@@ -130,7 +130,7 @@ The direction of the dependencies goes inwards the center, so the Domain Layer d
 
 Let's describe the Dependency Layer Diagram below:
 
-[![](https://paulovich.net/wp-content/uploads/2018/04/Untitled-Diagram-1.png)](https://paulovich.net/wp-content/uploads/2018/04/Untitled-Diagram-1.png)
+[![](/static/Untitled-Diagram-1.png)](/static/Untitled-Diagram-1.png)
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *   The domain is totally independent of other layers and frameworks.

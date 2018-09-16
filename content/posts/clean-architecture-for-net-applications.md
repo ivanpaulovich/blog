@@ -16,7 +16,7 @@ $ dotnet new clean \\
   --use-cases full \\
   --user-interface webapi
 
-As the SOLID principles and the Clean Architecture rules are worth to write about it, I am starting this blogging series explaining the decisions we have made through the development of the Manga Project. Feedback are welcome! Clean Architecture [expects at least 4 layers](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html) and in each layer there are common components. Starting with the layers from inside to the outer ones: \[caption id="attachment\_168" align="alignnone" width="721"\][![Clean Architecture Diagram by Uncle Bob](https://paulovich.net/wp-content/uploads/2018/04/CleanArchitecture-Uncle-Bob.jpg)](https://paulovich.net/wp-content/uploads/2018/04/CleanArchitecture-Uncle-Bob.jpg) Clean Architecture Diagram by Uncle Bob\[/caption\]
+As the SOLID principles and the Clean Architecture rules are worth to write about it, I am starting this blogging series explaining the decisions we have made through the development of the Manga Project. Feedback are welcome! Clean Architecture [expects at least 4 layers](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html) and in each layer there are common components. Starting with the layers from inside to the outer ones: \[caption id="attachment\_168" align="alignnone" width="721"\][![Clean Architecture Diagram by Uncle Bob](/static/CleanArchitecture-Uncle-Bob.jpg)](/static/CleanArchitecture-Uncle-Bob.jpg) Clean Architecture Diagram by Uncle Bob\[/caption\]
 
 1.  Enterprise Business Rules
 2.  Application Business Rules
@@ -28,7 +28,7 @@ Let's talk about on how we implemented this layers in the Manga Project!
 **1\. Enterprise Business Rules**
 ---------------------------------
 
-Beginning with the Enterprise Business Rules Layer we are talking about Aggregates, Entities, Value Objects and others patterns of a rich Domain. In our specific Bounded Context we have the Customer and the Account as **Aggregate Roots**, also the Credit/Debit transactions as **Entities** and last but no least we have the Name, Person Number and Amount as **Value Objects**. [![](https://paulovich.net/wp-content/uploads/2018/04/Account-Balance-Context.png)](https://paulovich.net/wp-content/uploads/2018/04/Account-Balance-Context.png) In short words, the previous components are the business entities that encapsulates fields and prevents unexpected changes or behaviors, these components maintain the application state in the most reliable way. Now, let me highlight some characteristics of this data structures:
+Beginning with the Enterprise Business Rules Layer we are talking about Aggregates, Entities, Value Objects and others patterns of a rich Domain. In our specific Bounded Context we have the Customer and the Account as **Aggregate Roots**, also the Credit/Debit transactions as **Entities** and last but no least we have the Name, Person Number and Amount as **Value Objects**. [![](/static/Account-Balance-Context.png)](/static/Account-Balance-Context.png) In short words, the previous components are the business entities that encapsulates fields and prevents unexpected changes or behaviors, these components maintain the application state in the most reliable way. Now, let me highlight some characteristics of this data structures:
 
 *   Aggregate Roots controls the entities graph and are used by repositories for data persistence. The software craftsman Vaugn Vernon wrote the [rules for designing effective aggregates](https://vaughnvernon.co/?p=838) and I highly recommend watching the video [Curing you Domain Model Anemia with Effective & Clean Tips from the Real World](https://www.youtube.com/watch?v=zzxinXTIMmo) from Edson Yanaga these helped me a lot to enrich my model.
 *   You will see that majority of the classes have properties with _private sets_ or _protected sets_ in order to prevent unexpected state changes from the several clients along the Use Cases (we avoid _public sets when possible)_.
@@ -70,7 +70,7 @@ Let's move to the Application Business Rules Layer that contains the Use Cases o
 
 > Just as the plans for a house or a library scream about the use cases of those buildings, so should the architecture of a software application scream about the use cases of the application.
 
-So our Use Cases implementations are first-class modules in the root of this layer. The shape of a Use Case is an **Interactor** object that receives an **Input**, do some work then pass the **Output** through the currently **Presenter** instance as shown in the following figure: [![](https://paulovich.net/wp-content/uploads/2018/04/Flow-Of-Control.png)](https://paulovich.net/wp-content/uploads/2018/04/Flow-Of-Control.png) In the previous Flow of Control we have:
+So our Use Cases implementations are first-class modules in the root of this layer. The shape of a Use Case is an **Interactor** object that receives an **Input**, do some work then pass the **Output** through the currently **Presenter** instance as shown in the following figure: [![](/static/Flow-Of-Control.png)](/static/Flow-Of-Control.png) In the previous Flow of Control we have:
 
 1.  An **Action** in the **CustomersController** calls a method in the **RegisterInteractor** with the **RegisterInput** data;
 2.  The **RegisterInteractor** that implements **IInputBoundary<T>** calls the **CustomerRepository** passing the **CustomerAggregate** object created in that Use Case.
@@ -305,13 +305,13 @@ And finally everything is tied together with configurations in the **autofac.jso
   \]
 }
 
-Summing up, we separated the Solution in projects so we could draw boundaries between the modules, clarify the dependencies and we have small classes that makes easy to create new features without changing the existing ones. These are the Solution Explorer in Visual Studio 2017: [![](https://paulovich.net/wp-content/uploads/2018/04/Manga-Solution-Explorer.png)](https://paulovich.net/wp-content/uploads/2018/04/Manga-Solution-Explorer.png) And to help you understand the dependencies between the projects this diagram: [![](https://paulovich.net/wp-content/uploads/2018/04/Layers.png)](https://paulovich.net/wp-content/uploads/2018/04/Layers.png) Finally, as we did not cover every detail in source code take a look at.
+Summing up, we separated the Solution in projects so we could draw boundaries between the modules, clarify the dependencies and we have small classes that makes easy to create new features without changing the existing ones. These are the Solution Explorer in Visual Studio 2017: [![](/static/Manga-Solution-Explorer.png)](/static/Manga-Solution-Explorer.png) And to help you understand the dependencies between the projects this diagram: [![](/static/Layers.png)](/static/Layers.png) Finally, as we did not cover every detail in source code take a look at.
 
 git clone https://github.com/ivanpaulovich/manga.git
 cd manga/source/WebAPI/Manga.WebApi
 dotnet run
 
-Or by: [![](https://paulovich.net/wp-content/uploads/2018/04/dotnet-new-caju-0.2.84.gif)](https://paulovich.net/wp-content/uploads/2018/04/dotnet-new-caju-0.2.84.gif) I hope that this template could improve your productivity in building applications with evolutionary architecture.
+Or by: [![](/static/dotnet-new-caju-0.2.84.gif)](/static/dotnet-new-caju-0.2.84.gif) I hope that this template could improve your productivity in building applications with evolutionary architecture.
 
 ### Updates
 

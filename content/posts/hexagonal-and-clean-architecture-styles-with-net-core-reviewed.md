@@ -73,7 +73,7 @@ With this style we have:
 *   Adapters providing implementations of frameworks, data access and UI.
 *   Externally the user, other systems and services.
 
-One way to explain the Hexagonal Architecture is by its shapes. Take a look at the following picture: ![](https://paulovich.net/wp-content/uploads/2018/04/hexagonal-1.png)  
+One way to explain the Hexagonal Architecture is by its shapes. Take a look at the following picture: ![](/static/hexagonal-1.png)  
 
 *   The blue potato shape at the center is the Domain Layer and there are reasons for it. Every business domain has its own rules, very specific business rules, that is the reason of its undefined shape. For example, I designed our Domain Layer with DDD Building Blocks.
 *   The application has an hexagonal shape because each of its sides has specifics protocols.
@@ -87,7 +87,7 @@ The direction of the dependencies goes inwards the center, so the Domain Layer d
 
 Let's describe the Dependency Diagram below:
 
-![](https://paulovich.net/wp-content/uploads/2018/04/Untitled-Diagram-1.png)
+![](/static/Untitled-Diagram-1.png)
 ----------------------------------------------------------------------------
 
 *   The Domain Layer is totally independent of other layers and frameworks.
