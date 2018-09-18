@@ -2,7 +2,7 @@
 title: "Clean Architecture Manga"
 description: "Testable and Decouple Application"
 link: https://github.com/ivanpaulovich/clean-architecture-manga
-screenshot: laramod.png
+screenshot: /static/github.png
 date: '2018-01-19'
 layout: portfolio
 ---

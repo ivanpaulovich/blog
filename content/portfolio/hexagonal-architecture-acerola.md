@@ -2,7 +2,7 @@
 title: "Hexagonal Architecture Acerola"
 description: "Hexagonal Architecture with DDD"
 link: https://github.com/ivanpaulovich/hexagonal-architecture-acerola
-screenshot: laramod.png
+screenshot: /static/github.png
 date: '2018-01-19'
 layout: portfolio
 ---

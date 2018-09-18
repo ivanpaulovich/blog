@@ -2,7 +2,7 @@
 title: "Event Sourcing Castanha"
 description: "Data streaming as source of truth"
 link: https://github.com/ivanpaulovich/event-sourcing-castanha
-screenshot: laramod.png
+screenshot: /static/github.png
 date: '2018-01-19'
 layout: portfolio
 ---

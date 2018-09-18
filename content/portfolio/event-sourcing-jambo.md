@@ -2,7 +2,7 @@
 title: "Event Sourcing Jambo"
 description: "Event Sourcing with Kafka and MongoDB"
 link: https://github.com/ivanpaulovich/event-sourcing-jambo
-screenshot: laramod.png
+screenshot: /static/github.png
 date: '2018-01-19'
 layout: portfolio
 ---
