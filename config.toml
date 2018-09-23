@@ -1,53 +1,65 @@
 ## Basic Configuration
 baseurl = "https://paulovich.net/"
 languageCode = "en"
-
 title = "Paulovich.NET"
-theme = "hyde-hyde"
-
-## Hugo Built-in Features
+theme = "ghostwriter"
+copyright = "Ivan Paulovich"
 disqusShortname = "paulovichdotnet"
 googleAnalytics = "UA-27176166-1"
-enableRobotsTXT = true
-comments = true
 
-# summarylength = 30
+[Privacy]
 
-#paginate = 5
+[Privacy.disqus]
+    disable = true
+
+[Privacy.googleAnalytics]
+    anonymizeIP = true
+    respectDoNotTrack = true
+    useSessionStorage = false
+
+[Author]
+    name = "Ivan Paulovich"
+    profile = "https://github.com/ivanpaulovich"
+
+[Taxonomies]
+    tag = "tags"
 
 ## Site Settings
 [params]
-    author = "Ivan Paulovich"
-    title = "Paulovich.NET"
-    # description = "..."
-    authorimage = "/img/hugo.png"
-    dateformat = "Jan 2, 2006"
-    highlightjs = true
-    highlightjsstyle = "github"
-    # please choose either GraphComment or Disqus
-
-## Social Accounts
-[params.social]
-    github = "ivanpaulovich"
-    instagram = "ivanpaulovich"
-    linkedin = "ivanpaulovich"
-    twitter = "ivanpaulovich"
-    facebook = "ivanpaulovich"
+    intro = true
+    headline = "Paulovich.NET"
+    description = "Development and Architecture"
+    github = "https://github.com/ivanpaulovich"
+    linkedin = "https://linkedin.com/in/ivanpaulovich/"
+    twitter = "https://twitter.com/ivanpaulovich"
     email = "ivan@paulovich.net"
+    opengraph = true
+    shareTwitter = true
+    shareFacebook = true
+    shareGooglePlus = true
+    shareLinkedIn = false
+    dateFormat = "Mon, Jan 2, 2006"
+    highlightJsUrl = ""
+    highlightJsLocalUrl = ""
+    exponeaJsUrl = ""
+    exponeaTarget = ""
+    exponeaToken = ""
+    exponeaTrackVisits = false
 
-## Main Menu
+[Permalinks]
+    post = "/:year/:month/:day/:filename/"
+
 [[menu.main]]
-    name = "Posts"
-    weight = 100
-    identifier = "posts"
-    url = "/posts/"
+    name = "Blog"
+    url = "/"
+    weight = 1
+
 [[menu.main]]
-    name = "Portfolio"
-    identifier = "portfolio"
-    weight = 200
-    url = "/portfolio/"
+    name = "Projects"
+    url = "/project/"
+    weight = 2
+
 [[menu.main]]
     name = "About"
-    identifier = "about"
-    weight = 300
-    url = "/about/"
+    url = "/page/about/"
+    weight = 4
