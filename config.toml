@@ -10,7 +10,7 @@ googleAnalytics = "UA-27176166-1"
 [Privacy]
 
 [Privacy.disqus]
-    disable = true
+    disable = false
 
 [Privacy.googleAnalytics]
     anonymizeIP = true

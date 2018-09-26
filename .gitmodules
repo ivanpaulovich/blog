@@ -3,7 +3,7 @@
 	url = https://github.com/budparr/gohugo-theme-ananke.git
 [submodule "public"]
 	path = public
-	url = git@github.com:ivanpaulovich/ivanpaulovich.github.io.git
+	url = git@github.com:ivanpaulovich.github.io.git
 	branch = master
 [submodule "themes/ghostwriter"]
 	path = themes/ghostwriter
