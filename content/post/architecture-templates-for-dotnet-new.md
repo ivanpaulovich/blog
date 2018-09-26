@@ -5,7 +5,8 @@ tags = []
 featured_image = ""
 description = ""
 aliases = [
-    "/architecture-templates-for-dotnet-new/"
+    "/architecture-templates-for-dotnet-new/",
+    "/posts/architecture-templates-for-dotnet-new/"
 ]
 +++
 I am releasing an new version of my [Architecture Templates for dotnet new](https://dotnetnew.azurewebsites.net/pack/Paulovich.Caju). We are working on testing, compatibility and documentation.
