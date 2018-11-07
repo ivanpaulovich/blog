@@ -62,7 +62,7 @@ To clarify the idea I created the next picture with the before and after applyin
 ![](/static/DIP-1-2.png) 
 
 *   On the left side of the next picture we find in blue an Layered Application where the DepositService depends on AccountSQLRepository.
-*   And on the right side in green, by adding an IAccountRepository and applying DIP then the AccountSQLRepository has your dependency pointing inwards.
+*   And on the right side in green, by adding an IAccountRepository and applying DIP then the AccountSQLRepository has your dependency pointing inwards. aaaaa
 
 The following listing of DepositService shows an implementation. Suggestion: clone the [Acerola repo](https://github.com/ivanpaulovich/acerola-hexagonal-architecture) for the full implementation.
 
