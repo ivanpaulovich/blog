@@ -4,3 +4,7 @@
 [submodule "themes/ghostwriter"]
 	path = themes/ghostwriter
 	url = https://github.com/jbub/ghostwriter.git
+[submodule "public"]
+	path = public
+	url = git@github.com:ivanpaulovich/ivanpaulovich.github.io.git
+	branch = master
