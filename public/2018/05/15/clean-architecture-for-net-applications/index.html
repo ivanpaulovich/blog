@@ -1,0 +1,379 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Clean Architecture for .NET Applications // Paulovich.NET</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.53" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <base href="https://paulovich.net/" />
+    <link rel="stylesheet" href="https://paulovich.net/css/main.min.89370bfdd636611d7283523dbb885b5a6137cf1749d5503e069b06f5cc55f5bb.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="/"><img class="app-header-avatar" src="./avatar.jpg" /></a>
+      <h1>Paulovich.NET</h1>
+      <p>.NET Development and Software Architecture</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/ivanpaulovich"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+        
+          <a target="_blank" href="https://www.linkedin.com/in/ivanpaulovich/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Clean Architecture for .NET Applications</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          May 15, 2018
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          8 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+          </div>
+      </div>
+    </header>
+    <div class="post-content">
+      
+
+<p>I&rsquo;d like to introduce my service template for .NET Applications based on the Clean Architecture style. You can download the full <a href="https://github.com/ivanpaulovich/manga-clean-architecture">source code</a> or you can play with the <a href="https://github.com/ivanpaulovich/dotnet-new-caju">dotnet new caju</a> tool using the following commands:</p>
+
+<pre><code>$ dotnet new -i Paulovich.Caju::0.4.0
+$ dotnet new clean \
+  --data-access mongo \
+  --use-cases full \
+  --user-interface webapi
+</code></pre>
+
+<p>As the SOLID principles and the Clean Architecture rules are worth to write about it, I am starting this blogging series explaining the decisions we have made through the development of the Manga Project. Feedback are welcome! Clean Architecture <a href="https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html">expects at least 4 layers</a> and in each layer there are common components. Starting with the layers from inside to the outer ones: <a href="/static/CleanArchitecture-Uncle-Bob.jpg"><img src="/static/CleanArchitecture-Uncle-Bob.jpg" alt="Clean Architecture Diagram by Uncle Bob" /></a></p>
+
+<ol>
+<li>Enterprise Business Rules</li>
+<li>Application Business Rules</li>
+<li>Interface Adapters</li>
+<li>Frameworks &amp; Drivers</li>
+</ol>
+
+<p>Let&rsquo;s talk about on how we implemented this layers in the Manga Project!</p>
+
+<h2 id="1-enterprise-business-rules"><strong>1. Enterprise Business Rules</strong></h2>
+
+<p>Beginning with the Enterprise Business Rules Layer we are talking about Aggregates, Entities, Value Objects and others patterns of a rich Domain. In our specific Bounded Context we have the Customer and the Account as <strong>Aggregate Roots</strong>, also the Credit/Debit transactions as <strong>Entities</strong> and last but no least we have the Name, Person Number and Amount as <strong>Value Objects</strong>. <a href="/static/Account-Balance-Context.png"><img src="/static/Account-Balance-Context.png" alt="" /></a> In short words, the previous components are the business entities that encapsulates fields and prevents unexpected changes or behaviors, these components maintain the application state in the most reliable way. Now, let me highlight some characteristics of this data structures:</p>
+
+<ul>
+<li>Aggregate Roots controls the entities graph and are used by repositories for data persistence. The software craftsman Vaugn Vernon wrote the <a href="https://vaughnvernon.co/?p=838">rules for designing effective aggregates</a> and I highly recommend watching the video <a href="https://www.youtube.com/watch?v=zzxinXTIMmo">Curing you Domain Model Anemia with Effective &amp; Clean Tips from the Real World</a> from Edson Yanaga these helped me a lot to enrich my model.</li>
+<li>You will see that majority of the classes have properties with <em>private sets</em> or <em>protected sets</em> in order to prevent unexpected state changes from the several clients along the Use Cases (we avoid <em>public sets when possible)</em>.</li>
+<li>We had to make exceptions for <em>constructors</em> due of deserialization requirements.</li>
+<li>Value Objects are expected to be immutable and they have the most closed fields. Fields that change only when we create a new instance of the Value Object.</li>
+</ul>
+
+<p>You can find interesting Domain Entities in our GitHub, following there are an Aggregate Root example:</p>
+
+<pre><code>public class Customer : Entity, IAggregateRoot
+{
+    public virtual Name Name { get; protected set; }
+    public virtual PIN PIN { get; protected set; }
+    public virtual int Version { get; protected set; }
+    public virtual AccountCollection Accounts { get; protected set; }
+
+    protected Customer()
+    {
+        Accounts = new AccountCollection();
+    }
+
+    public Customer(PIN pin, Name name)
+        : this()
+    {
+        PIN = pin;
+        Name = name;
+    }
+
+    public virtual void Register(Guid accountId)
+    {
+        Accounts = new AccountCollection();
+        Accounts.Add(accountId);
+    }
+}
+</code></pre>
+
+<h2 id="2-application-business-rules"><strong>2. Application Business Rules</strong></h2>
+
+<p>Let&rsquo;s move to the Application Business Rules Layer that contains the Use Cases of our Bounded Context. As said by Uncle Bob in his book Clean Architecture:</p>
+
+<blockquote>
+<p>Just as the plans for a house or a library scream about the use cases of those buildings, so should the architecture of a software application scream about the use cases of the application.</p>
+</blockquote>
+
+<p>So our Use Cases implementations are first-class modules in the root of this layer. The shape of a Use Case is an <strong>Interactor</strong> object that receives an <strong>Input</strong>, do some work then pass the <strong>Output</strong> through the currently <strong>Presenter</strong> instance as shown in the following figure: <a href="/static/Flow-Of-Control.png"><img src="/static/Flow-Of-Control.png" alt="" /></a> In the previous Flow of Control we have:</p>
+
+<ol>
+<li>An <strong>Action</strong> in the <strong>CustomersController</strong> calls a method in the <strong>RegisterInteractor</strong> with the <strong>RegisterInput</strong> data;</li>
+<li>The <strong>RegisterInteractor</strong> that implements <strong>IInputBoundary<T></strong> calls the <strong>CustomerRepository</strong> passing the <strong>CustomerAggregate</strong> object created in that Use Case.</li>
+<li>Then the <strong>RegisterInteractor</strong> generates a RegisterOutput data object (POCO) and passes it to the currently IOutputBoundary.</li>
+<li>The <strong>RegisterPresenter</strong> which implements <strong>IOutputBoundary</strong> receives the <strong>RegisterOutput</strong> and creates the <strong>RegisterModel</strong>.</li>
+<li>The <strong>RegisterModel</strong> created in step 4 are returned by the <strong>Action</strong>.</li>
+</ol>
+
+<p>In our example application we have other Use Cases that allow Customer Registration and Bank Account transactions. In simple terms these are the Use Cases:</p>
+
+<ul>
+<li>Customer Registration.</li>
+<li>Get Customer Account Details.</li>
+<li>Get Account Details.</li>
+<li>Deposit to an account.</li>
+<li>Withdraw from an account.</li>
+<li>Close an account.</li>
+</ul>
+
+<p>Continuing to explore our implementation you will see that the <strong>RegisterInteractor</strong> receives the services by DI. The Process method does the Application Business Rules, calls the Repository and at the end passes the <strong>RegisterOutput</strong> through the <strong>RegisterPresenter</strong> instance. Let&rsquo;s take a look at the RegisterInteractor class:</p>
+
+<pre><code>public class RegisterInteractor : IInputBoundary
+{
+    private readonly ICustomerWriteOnlyRepository customerWriteOnlyRepository;
+    private readonly IAccountWriteOnlyRepository accountWriteOnlyRepository;
+    private readonly IOutputBoundary outputBoundary;
+    private readonly IOutputConverter outputConverter;
+    
+    public RegisterInteractor(
+        ICustomerWriteOnlyRepository customerWriteOnlyRepository,
+        IAccountWriteOnlyRepository accountWriteOnlyRepository,
+        IOutputBoundary outputBoundary,
+        IOutputConverter outputConverter)
+    {
+        this.customerWriteOnlyRepository = customerWriteOnlyRepository;
+        this.accountWriteOnlyRepository = accountWriteOnlyRepository;
+        this.outputBoundary = outputBoundary;
+        this.outputConverter = outputConverter;
+    }
+
+    public async Task Process(RegisterInput input)
+    {
+        Customer customer = new Customer(input.PIN, input.Name);
+
+        Account account = new Account(customer.Id);
+        Credit credit = new Credit(account.Id, input.InitialAmount);
+        account.Deposit(credit);
+
+        customer.Register(account.Id);
+
+        await customerWriteOnlyRepository.Add(customer);
+        await accountWriteOnlyRepository.Add(account, credit);
+
+        CustomerOutput customerOutput = outputConverter.Map(customer);
+        AccountOutput accountOutput = outputConverter.Map(account);
+        RegisterOutput output = new RegisterOutput(customerOutput, accountOutput);
+
+        outputBoundary.Populate(output);
+    }
+}
+</code></pre>
+
+<p>What have you seen until here is <strong>Enterprise + Application Business Rules</strong> enforced without frameworks dependencies or without database coupling. Every details have abstractions protecting the Business Domain to be coupled to tech stuff.</p>
+
+<h2 id="3-interface-adapters">3. Interface Adapters</h2>
+
+<p>Now we advance to the next layer, at the Interface Adapters Layer we translate the User input in a way that the Interactors understands, it is good practice to do not reuse entities in this layer because it creates coupling, the front-end has frameworks, other ways of creating his data structures, different presentation for each field and validation rules. In our implementation we have the following components for every use case:</p>
+
+<ul>
+<li><strong>Request</strong>: a data structure for the user input.</li>
+<li><strong>A Controller with an Action</strong>: this component receives the user input, calls the appropriate Interactor which do some processing then pass the output through the Presenter instance.</li>
+<li><strong>Presenter</strong>: it converters the Output to the Model.</li>
+<li><strong>Model</strong>: this is the return data structure for MVC applications.</li>
+</ul>
+
+<p>And this is how looks a Controller for the Register Use Case. We must highlight that the Controller knows which Interactor to call but it does not care about the Output of it, instead the Controller delegates the responsibility of generating a Model to the Presenter instance.</p>
+
+<pre><code>[Route(&quot;api/[controller]&quot;)]
+public class CustomersController : Microsoft.AspNetCore.Mvc.Controller
+{
+    private readonly IInputBoundary&lt;RegisterInput&gt; registerInput;
+    private readonly Presenter registerPresenter;
+
+    public CustomersController(
+        IInputBoundary&lt;RegisterInput&gt; registerInput,
+        Presenter registerPresenter)
+    {
+        this.registerInput = registerInput;
+        this.registerPresenter = registerPresenter;
+    }
+
+    /// &lt;summary&gt;
+    /// Register a new Customer
+    /// &lt;/summary&gt;
+    [HttpPost]
+    public async Task&lt;IActionResult&gt; Post([FromBody]RegisterRequest message)
+    {
+        var request = new RegisterInput(
+           message.PIN, message.Name, message.InitialAmount);
+        await registerInput.Process(request);
+        return registerPresenter.ViewModel;
+    }
+}
+</code></pre>
+
+<p>An Presenter class is detailed bellow and it shows a conversion from the RegisterOutput to two different ViewModels. One ViewModel for null Outputs and another ViewModel for successful registrations.</p>
+
+<pre><code>public class Presenter : IOutputBoundary&lt;RegisterOutput&gt;
+{
+    public IActionResult ViewModel { get; private set; }
+    public RegisterOutput Output { get; private set; }
+
+    public void Populate(RegisterOutput response)
+    {
+        Output = response;
+
+        if (response == null)
+        {
+            ViewModel = new NoContentResult();
+            return;
+        }
+        
+        List&lt;TransactionModel&gt; transactions = new List&lt;TransactionModel&gt;();
+
+        foreach (var item in response.Account.Transactions)
+        {
+            var transaction = new TransactionModel(
+                item.Amount,
+                item.Description,
+                item.TransactionDate);
+
+            transactions.Add(transaction);
+        }
+
+        AccountDetailsModel account = new AccountDetailsModel(
+            response.Account.AccountId,
+            response.Account.CurrentBalance,
+            transactions);
+
+        List&lt;AccountDetailsModel&gt; accounts = new List&lt;AccountDetailsModel&gt;();
+        accounts.Add(account);
+
+        Model model = new Model(
+            response.Customer.CustomerId,
+            response.Customer.Personnummer,
+            response.Customer.Name,
+            accounts
+        );
+
+        ViewModel = new CreatedAtRouteResult(&quot;GetCustomer&quot;, 
+            new { customerId = model.CustomerId }, 
+            model);
+    }
+}
+</code></pre>
+
+<h2 id="4-frameworks-drivers"><strong>4. Frameworks &amp; Drivers</strong></h2>
+
+<p>Our more external layer is the Frameworks &amp; Drivers who implements Data Base Access, Dependency Injection Framework (DI), JSON Serializer and technology specific stuff. It has an CustomerRepository implementation. See the GitHub for the MongoContext and other Repositories classes.</p>
+
+<pre><code>public class CustomerRepository : ICustomerReadOnlyRepository, ICustomerWriteOnlyRepository
+{
+    private readonly Context mongoContext;
+
+    public CustomerRepository(Context mongoContext)
+    {
+        this.mongoContext = mongoContext;
+    }
+
+    public async Task Get(Guid customerId)
+    {
+        Customer customer = await mongoContext.Customers
+            .Find(e =&gt; e.Id == customerId)
+            .SingleOrDefaultAsync();
+
+        return customer;
+    }
+
+    public async Task Add(Customer customer)
+    {
+        await mongoContext.Customers
+            .InsertOneAsync(customer);
+    }
+
+    public async Task Update(Customer customer)
+    {
+        await mongoContext.Customers
+            .ReplaceOneAsync(e =&gt; e.Id == customer.Id, customer);
+    }
+}
+</code></pre>
+
+<p>We group the DI by Autofac Modules and created rules for selecting the interfaces and implementations by namespace patterns.</p>
+
+<pre><code>public class InfrastructureModule : Autofac.Module
+{
+    public string ConnectionString { get; set; }
+    public string DatabaseName { get; set; }
+
+    protected override void Load(ContainerBuilder builder)
+    {
+        builder.RegisterType()
+            .As()
+            .WithParameter(&quot;connectionString&quot;, ConnectionString)
+            .WithParameter(&quot;databaseName&quot;, DatabaseName)
+            .SingleInstance();
+
+        //
+        // Register all Types in Manga.Infrastructure
+        //
+        builder.RegisterAssemblyTypes(typeof(OutputConverter).Assembly)
+            .AsImplementedInterfaces()
+            .InstancePerLifetimeScope();
+    }
+}
+</code></pre>
+
+<p>And finally everything is tied together with configurations in the <strong>autofac.json</strong> which also makes possible to change implementations easily:</p>
+
+<pre><code>{
+  &quot;defaultAssembly&quot;: &quot;Manga.Infrastructure&quot;,
+  &quot;modules&quot;: [
+    {
+      &quot;type&quot;: &quot;Manga.Infrastructure.Modules.WebApiModule&quot;,
+      &quot;properties&quot;: {
+      }
+    },
+    {
+      &quot;type&quot;: &quot;Manga.Infrastructure.Modules.ApplicationModule&quot;,
+      &quot;properties&quot;: {
+      }
+    },
+    {
+      &quot;type&quot;: &quot;Manga.Infrastructure.Modules.InfrastructureModule&quot;,
+      &quot;properties&quot;: {
+        &quot;ConnectionString&quot;: &quot;mongodb://10.0.75.1:27017&quot;,
+        &quot;DatabaseName&quot;: &quot;Manga-V01&quot;
+      }
+    }
+  ]
+}
+</code></pre>
+
+<p>Summing up, we separated the Solution in projects so we could draw boundaries between the modules, clarify the dependencies and we have small classes that makes easy to create new features without changing the existing ones. These are the Solution Explorer in Visual Studio 2017: <a href="/static/Manga-Solution-Explorer.png"><img src="/static/Manga-Solution-Explorer.png" alt="" /></a> And to help you understand the dependencies between the projects this diagram: <a href="/static/Layers.png"><img src="/static/Layers.png" alt="" /></a> Finally, as we did not cover every detail in source code take a look at.</p>
+
+<pre><code>git clone https://github.com/ivanpaulovich/manga.git
+cd manga/source/WebAPI/Manga.WebApi
+dotnet run
+</code></pre>
+
+<p>Or by: <a href="/static/dotnet-new-caju-0.2.84.gif"><img src="/static/dotnet-new-caju-0.2.84.gif" alt="" /></a> I hope that this template could improve your productivity in building applications with evolutionary architecture.</p>
+
+<h3 id="updates">Updates</h3>
+
+<p>I changed the installation and <a href="https://paulovich.net/architecture-templates-for-dotnet-new/">template generation command lines</a>.</p>
+
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
