@@ -2,7 +2,7 @@
 baseurl = "https://paulovich.net/"
 languageCode = "en"
 title = "Paulovich.NET"
-theme = "ghostwriter"
+theme = "m10c"
 copyright = "Ivan Paulovich"
 disqusShortname = "paulovichdotnet"
 googleAnalytics = "UA-27176166-1"
@@ -28,7 +28,7 @@ googleAnalytics = "UA-27176166-1"
 [params]
     intro = true
     headline = "Paulovich.NET"
-    description = "Development and Architecture"
+    description = ".NET Development and Software Architecture"
     github = "https://github.com/ivanpaulovich"
     linkedin = "https://linkedin.com/in/ivanpaulovich/"
     twitter = "https://twitter.com/ivanpaulovich"
@@ -45,6 +45,14 @@ googleAnalytics = "UA-27176166-1"
     exponeaTarget = ""
     exponeaToken = ""
     exponeaTrackVisits = false
+
+    [[params.social]]
+        name = "github"
+        url = "https://github.com/ivanpaulovich"
+
+    [[params.social]]
+        name = "linkedin"
+        url = "https://www.linkedin.com/in/ivanpaulovich/"
 
 [Permalinks]
     post = "/:year/:month/:day/:filename/"
