@@ -20,9 +20,11 @@ Let me explain how you can design a rigid and coupled software architecture: Sup
 
 > There are so many moving parts that I am gonna fail to get the real user feedback! Worse... it will fail slowly.
 
-Now... suppose that you wish to design a software architecture that prioritize collaboration with Domain Experts. You desire an application to be loose coupled to a database and a web server, you want to decide later about these complex moving parts. The priorite is think about implementing the business requirements right? You will need to work on your programming disciplines.
+Now... suppose that you wish to design a software architecture that prioritize collaboration with Domain Experts. You desire an application to be loose coupled to a database and a web server, you want to decide later about these complex moving parts. The priorite is about implementing the business requirements right? You will need to work on your programming disciplines.
 
-## TDD and the "Ports and Adapters" architecture style
+## "Ports and Adapters" architecture style and TDD
+
+"Ports and Adapters" gives you a technique to decouple the high level modules from the low level modules, in other words you can decouple the business rules from the database and user interface.
 
 One benefit of "Ports and Adapters" is tha the application use cases can be implemented in isolation of external services.
 
