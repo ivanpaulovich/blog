@@ -4,19 +4,19 @@ One question to test a working team agile:
 
 > Are teams delivering working software to real users on every iteration (including the first) and gathering feedback?
 
-Would you be surprised on how teams fail this test, its common that teams do not deliver on the first iteration (starting with the wrong foot) then every feature requires a long time to be used by the users and to get a feedback.
+Would you be surprised on how teams fail this test, its common that teams do not deliver on the first iteration (starting with the wrong foot) then every feature requires a long time to be deployed to production and used by the users gathering feedback.
 
-Agile is about collaboration with people, to get feedback from them!
+Agile is about collaboration with people, gathering feedback from them!
 
 > Why software take so long to reach the production environment?
 
 One reason that I identify is coupling. Its when developers implement the business coupled to so many technology details. Have you seen a `Story` like `Create a Customer Acccount in the database and exposed in a Web API`?
 
-Do we need a database to implement the business rules? Do we need a running web server to get the real user feedback on the business rules? Repeat with me:
+Do we need a database server to implement the business rules? Do we need a running web server to gather the real user feedback about the business rules implementation? The answer is:
 
-> I don't need a SQL Server and a running Web Server to get user feedback.
+> I don't need a SQL Server or a running Web Server to gather user feedback.
 
-Let me explain how you can design a rigid and coupled software architecture: Suppose that for my application to reach Production I am gonna need to configure database, web server, enterprise frameworks, firewall and implement the business rules *then get the real user feedback*.
+Let me explain how you can design a rigid and coupled software architecture: Suppose that for my application to reach Production I am gonna need to configure database, web server, enterprise frameworks, firewall, implement the business rules, get approvals __then get the real user feedback__.
 
 > There are so many moving parts that I am gonna fail to get the real user feedback! Worse... it will fail slowly.
 
