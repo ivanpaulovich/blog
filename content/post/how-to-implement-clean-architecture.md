@@ -1,28 +1,31 @@
 Nowadays all software development companies are self proclaimed to be Agile (if you are not Agile you are not cool right?). I could say that most companies follow the SCRUM ceremonies, they have developers, SM and PO roles. Is that enough to be Agile?
 
-One question to check a working team agile: 
+You could say a lot about a company by the answer of the next question: 
 
 > Are teams delivering working software to real users on every iteration (including the first) and gathering feedback?
 
 Would you be surprised on how teams fail this test:
-* Teams usually do not deliver on the first iteration (starting with the wrong foot).
-* At the end of every iteration there is no user feedback and each feature requires a long lead time to be deployed into production.
+* Teams usually do not deliver on the first iteration.
+* They fail on gathering user feedback on every iteration.
+* Long lead time for every new feature.
 
 Agile is about collaboration with people, gathering feedback from real users!
 
-> Why software take so long to reach the production environment?
+> Why software take so long to reach the production environment? Why they have so many bugs?
 
-One reason that I identify is coupling. Its when developers implement the business coupled to so many technology details. Have you seen a `Story` like `Create a Customer Acccount in the database and exposed in a Web API`?
+The software architecture is the main reason for software taking long time to be deployed into production. It is common that teams do a lot of effort designing a big archictecture up front that requires fancy frameworks for every application feature. The end result is an application overwhelmed of dependencies, error prone and hard to change.
 
-Do we need a database server to implement the business rules? Do we need a running web server to gather the real user feedback about the business rules implementation? The answer is:
+The application reachs production with many bugs because the team spend most of the time configuring the web server, working with ORM frameworks and the user interfaces. The team do not spend time in collaboration with the users trying to understand the use cases and implementing the business rules.
+
+Its all about coupling! The developers are implementing the business coupled to technology details because they do not know how to create abstractions. Do we need a database server to implement the business rules? Do we need a running web server to gather the real user feedback about the business rules implementation? The answer is:
 
 > I don't need a SQL Server or a running Web Server to gather user feedback.
 
-Let me explain how you can design a rigid and coupled software architecture: Suppose that for my application to reach Production I am gonna need to configure database, web server, enterprise frameworks, firewall, implement the business rules, get approvals __then get the real user feedback__.
+To design a rigid and coupled software architecture is too easy! Simple begin by configuring the database, the web server, the frameworks then in the remaining time implement the business rules.
 
-> There are so many moving parts that I am gonna fail to get the real user feedback! Worse... it will fail slowly.
+> With so many moving parts we fail to get the real user feedback! Worse... it will fail slowly.
 
-Now... suppose that you wish to design a software architecture that prioritize collaboration with Domain Experts. You desire an application to be loose coupled to a database and a web server, you want to decide later about these complex moving parts. The priorite is about implementing the business requirements right? You will need to work on your programming disciplines.
+Now... suppose that you wish to design a software architecture that prioritize collaboration with Domain Experts. Your desire an application to be loose coupled to a database and a web server, you want to decide in the right moment about these details. Is the implementing the business requirements the priority for your organization? You will need to work on your programming disciplines.
 
 ## "Ports and Adapters" architecture style and TDD
 
