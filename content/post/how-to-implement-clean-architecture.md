@@ -29,7 +29,7 @@ Now... suppose that you wish to design a software architecture that prioritize c
 
 ## Just Enough Architecture
 
-What if you could focus on business requirements and ignore everything else. The idea behind "Ports and Adapters" is to decouple the high level modules from the low level modules, in other words you can decouple the business rules from the database and user interface.
+What if you could focus on business requirements and ignore everything else? The idea behind "Ports and Adapters" is to decouple the high level modules from the low level modules, in simple terms you could decouple the business rules from the database and user interface.
 
 ## "Ports and Adapters" architecture style and TDD
 
