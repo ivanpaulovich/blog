@@ -23,7 +23,7 @@ Its all about coupling! The developers are implementing the business coupled to 
 
 To design a rigid and coupled software architecture is too easy! Simple begin by configuring the database, the web server, the frameworks then in the remaining time implement the business rules.
 
-> With so many moving parts we fail to get the real user feedback! Worse... it will fail slowly.
+> With so many moving parts we fail to get the real user feedback! Worse... it is going to fail slowly.
 
 Now... suppose that you wish to design a software architecture that prioritize collaboration with Domain Experts. You desire an application loose coupled to a database and a web server, you want to decide about these details in the right moment. Is implementing the business requirements the priority for your organization? If that's the case you will need to work on your programming disciplines.
 
