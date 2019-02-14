@@ -1,12 +1,14 @@
-Nowadays all software development companies are self proclaimed to be Agile (if you are not Agile you are not cool right?), I could say that most companies follow the SCRUM ceremonies, they have a SM, PO and developers roles. Is that enough?
+Nowadays all software development companies are self proclaimed to be Agile (if you are not Agile you are not cool right?). I could say that most companies follow the SCRUM ceremonies, they have developers, SM and PO roles. Is that enough to be Agile?
 
-One question to test a working team agile: 
+One question to check a working team agile: 
 
 > Are teams delivering working software to real users on every iteration (including the first) and gathering feedback?
 
-Would you be surprised on how teams fail this test, its common that teams do not deliver on the first iteration (starting with the wrong foot) then every feature requires a long time to be deployed to production and used by the users gathering feedback.
+Would you be surprised on how teams fail this test:
+* Teams usually do not deliver on the first iteration (starting with the wrong foot).
+* At the end of every iteration there is no user feedback and each feature requires a long lead time to be deployed into production.
 
-Agile is about collaboration with people, gathering feedback from them!
+Agile is about collaboration with people, gathering feedback from real users!
 
 > Why software take so long to reach the production environment?
 
