@@ -48,7 +48,7 @@ The secondary actors are on the right side:
 
 What I am saying is that whatever the right or left side dependencies are you always can delay their implementation by prioritizing tests and mocks. The use cases are the important thing you need to focus on! Is there a correct order to implement an Hexagonal Architecture?
 
-## Ports and Adapters implementation workflow
+## Ports and Adapters Implementation Workflow
 
 The benefit of "Ports and Adapters" is that the application use cases could be implemented in isolation from external services, so we can delay the database and webserver implementation by creating fake implementations. 
 
@@ -56,11 +56,11 @@ The benefit of "Ports and Adapters" is that the application use cases could be i
 
 (first step)
 
-The **first driving adapter** you should implement are the **test harness**. And to run tests you don't need an user inteface, see how you don't need to worry about button colors and font faces? These tests will guide the use case implementation against a mocked database.
+The **first driving adapter** you should implement are the **Test Harness**. And to run tests you don't need an user inteface, see how you don't need to worry about button colors and font faces? These tests will guide the use case implementation against a mocked database.
 
 (second step)
 
-With the knowledge acquired by the unit tests implementation you can more confident design the **user interface** then get user feedback. Every stage is a learning process, be open to change the use cases implementation and test harness at anytime!
+With the knowledge acquired by the unit tests implementation you can more confident design the **User Interface** then get user feedback. Every stage is a learning process, be open to change the use cases implementation and test harness at anytime!
 
 (second step)
 
@@ -68,4 +68,4 @@ You now can go deeper in details and implement how the application consume the d
 
 (third step)
 
-The last step you run the **UI** against a real database implementation and get user feedback!
+The last step you run the **User Interface** against a real database implementation and get more feedback!
