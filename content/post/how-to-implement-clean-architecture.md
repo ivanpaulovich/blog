@@ -40,7 +40,7 @@ As you can see on the left side there are driving actors:
 * Test Harness
 * User Interface
 
-The secondary actors are on the right:
+The secondary actors are on the right side:
 * Mocked Database
 * SQL Database Adapter
 * Mocked Webserver
