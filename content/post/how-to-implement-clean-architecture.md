@@ -1,12 +1,15 @@
-Nowadays all software development companies are self titled Agile (if you are not Agile you are not cool right?). I could say that most companies follow the SCRUM ceremonies, they have small team of developers, they have the SM and PO roles. Is that enough to be Agile?
+Nowadays all software development companies are self titled Agile (if you are not Agile you are not cool right?). I could say that most companies follow the SCRUM ceremonies, they have small team of developers, they have the SM and PO roles. 
 
-You could say a lot about a company on how they answer the following question: 
+> Is that enough to be Agile?
+
+I could say a lot about a company on how they answer the following question: 
 
 > Are teams delivering working software to real users on every iteration (including the first) and gathering feedback?
 
-Would you be surprised on how teams fail this test:
-* Teams usually do not deliver on the first iteration. 
-* They do not gather user feedback on every iteration.
+If the answer is *No* I could suppose the following:
+
+* Teams usually do not deliver on the first iteration because they are designing an architecture. 
+* They do not gather user feedback on every iteration, the business value is retained for long time.
 * Long lead time for every new feature.
 
 Agile is about collaboration with people, gathering feedback from real users!
@@ -17,7 +20,7 @@ The software architecture is the main reason for software taking long time to be
 
 The application reachs production with many bugs because the team spend most of the time configuring the web server, working with ORM frameworks and the user interfaces. The team did not have time in collaboration with the users trying to understand the use cases and implementing the business rules.
 
-By a lack of confidence, the developers try to implement the frameworks on the initial sprints to not get caught unprepared on the later sprints. This decision create coupling with technology. Let me ask some questions: - Do we need a database server to implement the business rules? Do we need a running web server to gather the real user feedback? The answer is:
+By a lack of confidence, the developers try to implement the frameworks on the initial sprints to not get caught unprepared on the later sprints. This decision create coupling with technology. Let me ask some questions: - Do we need a database server to implement the business rules? Do we need a running web server to gather the real user feedback?
 
 > We don't need a SQL Server or a running Web Server to gather user feedback on the business rules.
 
