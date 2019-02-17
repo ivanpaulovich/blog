@@ -76,6 +76,8 @@ You may be wondering about testing the User Interface. You are right, you could 
 
 ## Why this is Agile?
 
+The only way to go.
+
 > Do you see how the software is implemented incrementally? How on every sprint you accquire business knowleadge that help you be effective on the next one?
 
 When tests are used correctly they help you in the long run.
