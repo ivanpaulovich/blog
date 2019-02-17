@@ -76,8 +76,8 @@ You may be wondering about testing the User Interface. You are right, you could 
 
 ## Why this is Agile?
 
-The only way to go.
+Agile methodology is not about doing things quickly without quality. When designing tests you may feel that you are wasting time and that is the opposite:
 
-> Do you see how the software is implemented incrementally? How on every sprint you accquire business knowleadge that help you be effective on the next one?
+> The only way to go fast is to go well. Every time you yeild to the temptation to trade quality for speed, you slow down. Every time. Uncle Bob.
 
-When tests are used correctly they help you in the long run.
+Software should be implemented incrementally and on every sprint you should acquire business knowleadge that help you be effective on the next sprint.
