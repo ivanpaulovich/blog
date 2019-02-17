@@ -64,8 +64,8 @@ With the knowledge acquired by the unit tests implementation you can more confid
 
 (second step)
 
-You now can go deeper in details and implement how the application consume the database, and you can run your existing tests against this new adapter. Should I say that you will do small changes in the application use cases to support this new adapter? You will!
+You now can go deeper in details and implement how the application consume the database, and you can run your existing tests against this secondary actor. Should I say that you will do small changes in the application use cases to support this new adapter? You will!
 
 (third step)
 
-The last step you run the UI against a real database implementation and get user feedback!
+The last step you run the **UI** against a real database implementation and get user feedback!
