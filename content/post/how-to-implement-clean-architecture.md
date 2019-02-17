@@ -48,7 +48,7 @@ The secondary actors are on the right side:
 
 What I am saying is that whatever the right or left side dependencies are you always can delay their implementation by prioritizing tests and mocks. The use cases are the important thing you need to focus on! Is there a correct order to implement an Hexagonal Architecture?
 
-## "Ports and Adapters" suggested workflow
+## Ports and Adapters implementation workflow
 
 The benefit of "Ports and Adapters" is that the application use cases could be implemented in isolation from external services, so we can delay the database and webserver implementation by creating fake implementations. 
 
