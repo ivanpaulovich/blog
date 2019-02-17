@@ -69,3 +69,13 @@ You now can go deeper in details and implement how the application consume the d
 (third step)
 
 The last step you run the **User Interface** against a real database implementation and get more feedback!
+
+### Optional Acceptance Tests
+
+You may be wondering about testing the User Interface. You are right, you could design the user interface guided by Acceptance Tests. These tests will only ensure the required info.
+
+## Why this is Agile?
+
+> Do you see how the software is implemented incrementally? How on every sprint you accquire business knowleadge that help you be effective on the next one?
+
+When tests are used correctly they help you in the long run.
