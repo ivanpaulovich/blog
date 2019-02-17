@@ -62,11 +62,11 @@ The **first driving adapter** you should implement are the **Test Harness**. And
 
 With the knowledge acquired by the unit tests implementation you can more confident design the **User Interface** then get user feedback. Every stage is a learning process, be open to change the use cases implementation and test harness at anytime!
 
-(second step)
+(third step)
 
 You now can go deeper in details and implement how the application consume the database, and you can run your existing tests against this secondary actor. Should I say that you will do small changes in the application use cases to support this new adapter? You will!
 
-(third step)
+(fourty step)
 
 The last step you run the **User Interface** against a real database implementation and get more feedback!
 
