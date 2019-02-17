@@ -34,11 +34,38 @@ Now... suppose that you wish to design a software architecture that prioritize c
 
 What if you could focus on business requirements and ignore everything else? The idea behind "Ports and Adapters" is to decouple the high level modules from the low level modules, in simple terms you could decouple the business rules from the database and user interface.
 
-## "Ports and Adapters" architecture style and TDD
+(Figure with Ports and Adapters)
 
-The benefit of "Ports and Adapters" is that the application use cases could be implemented in isolation from external services.
+As you can see on the left side there are driving actors:
+* Test Harness
+* User Interface
 
-1. The first application user will be the test harnest which will guide the implementations against a mocked database.
-2. The next step is to create a user interface for the application, so the user can interact with the use cases.
-3. After the use cases been validaded by the users and the unit tests the team can design the database.
-4. In a last step the user will interact with the application using the UI that will run against a real database.
+The secondary actors are on the right:
+* Mocked Database
+* SQL Database Adapter
+* Mocked Webserver
+* Webserver Adapter
+
+What I am saying is that whatever the right or left side dependencies are you always can delay their implementation by prioritizing tests and mocks. The use cases are the important thing you need to focus on! Is there a correct order to implement an Hexagonal Architecture?
+
+## "Ports and Adapters" suggested workflow
+
+The benefit of "Ports and Adapters" is that the application use cases could be implemented in isolation from external services, so we can delay the database and webserver implementation by creating fake implementations. 
+
+> What about the driving actors? When should I implement them?
+
+(first step)
+
+The **first driving adapter** you should implement are the **test harness**. And to run tests you don't need an user inteface, see how you don't need to worry about button colors and font faces? These tests will guide the use case implementation against a mocked database.
+
+(second step)
+
+With the knowledge acquired by the unit tests implementation you can more confident design the **user interface** then get user feedback. Every stage is a learning process, be open to change the use cases implementation and test harness at anytime!
+
+(second step)
+
+You now can go deeper in details and implement how the application consume the database, and you can run your existing tests against this new adapter. Should I say that you will do small changes in the application use cases to support this new adapter? You will!
+
+(second step)
+
+The last step you run the UI against a real database implementation and get user feedback!
