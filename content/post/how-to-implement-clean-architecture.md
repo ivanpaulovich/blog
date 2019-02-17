@@ -74,7 +74,7 @@ The last step you run the **User Interface** against a real database implementat
 
 You may be wondering about testing the User Interface. You are right, you could design the user interface guided by Acceptance Tests. These tests will only ensure the required info.
 
-## Why this is Agile?
+## Why TDD is Agile?
 
 Agile methodology is not about doing things quickly without quality. When designing tests you may feel that you are wasting time and that is the opposite:
 
