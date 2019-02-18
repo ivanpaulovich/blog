@@ -1,6 +1,6 @@
 Nowadays all software development companies are self-titled Agile (if you are not Agile you are not cool right?). Most companies that follow the SCRUM ceremonies with small developers team, with SM and PO roles are self-titled Agile. 
 
-> Is that enough to be Agile?
+> Are SCRUM ceremonies enough to be Agile? How the software implementation interfer? 
 
 I could say a lot about a company on how they answer the following question: 
 
