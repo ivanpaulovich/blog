@@ -1,4 +1,4 @@
-Nowadays all software development companies are self-titled Agile (if you are not Agile you are not cool right?). I could say that most companies follow the SCRUM ceremonies, they have small team of developers, they have the SM and PO roles. 
+Nowadays all software development companies are self-titled Agile (if you are not Agile you are not cool right?). Most companies that follow the SCRUM ceremonies with small developers team, with SM and PO roles are self-titled Agile. 
 
 > Is that enough to be Agile?
 
