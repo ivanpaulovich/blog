@@ -1,3 +1,12 @@
++++
+title =  "Clean Architecture with TDD"
+date = 2018-05-26T06:12:52+02:00
+tags = []
+featured_image = ""
+description = ""
+draft = true
++++
+ç
 Nowadays all software development companies are self-titled Agile (if you are not Agile you are not cool right?). Most companies are following the SCRUM ceremonies, they adopted small developers teams, they have a SM and PO roles. 
 
 > Are SCRUM ceremonies enough to be Agile? How the software implementation interfer? 
@@ -37,14 +46,16 @@ What if we could focus on business requirements and ignore everything else? The 
 (Figure with Ports and Adapters)
 
 As you can see on the left side there are driving actors:
+
 * Test Harness
 * User Interface
 
 The secondary actors are on the right side:
-* Mocked Database
-* SQL Database Adapter
-* Mocked Webserver
-* Webserver Adapter
+
+- Mocked Database
+- SQL Database Adapter
+- Mocked Webserver
+- Webserver Adapter
 
 What I am saying is that whatever the right or left side dependencies are you always can delay their implementation by prioritizing tests and mocks. The use cases are the important thing you need to focus on! Is there a correct order to implement an Hexagonal Architecture?
 

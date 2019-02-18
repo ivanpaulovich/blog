@@ -2,7 +2,7 @@
 baseurl = "https://paulovich.net/"
 languageCode = "en"
 title = "Paulovich.NET"
-theme = "m10c"
+theme = "hugo-lamp"
 copyright = "Ivan Paulovich"
 disqusShortname = "paulovichdotnet"
 googleAnalytics = "UA-27176166-1"
@@ -26,13 +26,10 @@ googleAnalytics = "UA-27176166-1"
 
 ## Site Settings
 [params]
+    logo = "/img/avatar.jpg"
     intro = true
     headline = "Paulovich.NET"
     description = ".NET Development and Software Architecture"
-    github = "https://github.com/ivanpaulovich"
-    linkedin = "https://linkedin.com/in/ivanpaulovich/"
-    twitter = "https://twitter.com/ivanpaulovich"
-    email = "ivan@paulovich.net"
     opengraph = true
     shareTwitter = true
     shareFacebook = true
@@ -46,28 +43,14 @@ googleAnalytics = "UA-27176166-1"
     exponeaToken = ""
     exponeaTrackVisits = false
 
-    [[params.social]]
-        name = "github"
-        url = "https://github.com/ivanpaulovich"
-
-    [[params.social]]
-        name = "linkedin"
-        url = "https://www.linkedin.com/in/ivanpaulovich/"
+# Social networks
+  email = "ivan@paulovich.net"
+  github = "ivanpaulovich"
+  twitter = "ivanpaulovich"
+  linkedin = "ivanpaulovich"
+  facebook = "ivanpaulovich"
+  instagram = "ivanpaulovich"
+  youtube = "ivanpaulovich"
 
 [Permalinks]
     post = "/:year/:month/:day/:filename/"
-
-[[menu.main]]
-    name = "Blog"
-    url = "/"
-    weight = 1
-
-[[menu.main]]
-    name = "Projects"
-    url = "/project/"
-    weight = 2
-
-[[menu.main]]
-    name = "About"
-    url = "/page/about/"
-    weight = 4
