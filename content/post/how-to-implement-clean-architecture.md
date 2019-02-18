@@ -1,4 +1,4 @@
-Nowadays all software development companies are self titled Agile (if you are not Agile you are not cool right?). I could say that most companies follow the SCRUM ceremonies, they have small team of developers, they have the SM and PO roles. 
+Nowadays all software development companies are self-titled Agile (if you are not Agile you are not cool right?). I could say that most companies follow the SCRUM ceremonies, they have small team of developers, they have the SM and PO roles. 
 
 > Is that enough to be Agile?
 
@@ -24,7 +24,7 @@ By a lack of confidence, the developers try to implement the frameworks on the i
 
 > We don't need a SQL Server or a running Web Server to gather user feedback on the business rules.
 
-To design a rigid and coupled software architecture is too easy! Simple begin by configuring the database, the web server, the frameworks then in the remaining time implement the business rules.
+To design a tightly coupled architecture you just need to begin with configuring the database, the web server, the frameworks then in the remaining time implementing the business rules.
 
 > With so many moving parts we fail to get the real user feedback! Worse... it will fail slowly.
 
