@@ -1,12 +1,7 @@
 +++
-title =  "Clean Architecture with TDD"
-date = 2018-05-26T06:12:52+02:00
-tags = []
-featured_image = ""
-description = ""
-draft = true
+title =  "Clean Architecture and TDD"
+date = 2019-02-19T06:12:52+02:00
 +++
-ç
 Nowadays all software development companies are self-titled Agile (if you are not Agile you are not cool right?). Most companies are following the SCRUM ceremonies, they adopted small developers teams, they have a SM and PO roles. 
 
 > Are SCRUM ceremonies enough to be Agile? How the software implementation interfer? 
@@ -43,7 +38,7 @@ Now... suppose that we wish to design a software architecture that prioritize co
 
 What if we could focus on business requirements and ignore everything else? The idea behind "Ports and Adapters" is to decouple the high level modules from the low level modules, in simple terms you could decouple the business rules from the database and user interface.
 
-(Figure with Ports and Adapters)
+[![Hexagonal Architecture](/static/hexagonal-architecture/hexagonal-architecture.png)](/static/hexagonal-architeture/hexagonal-architecture.png)
 
 As you can see on the left side there are driving actors:
 
@@ -57,6 +52,8 @@ The secondary actors are on the right side:
 - Mocked Webserver
 - Webserver Adapter
 
+The use cases are implemented inside the **Application Layer**.
+
 What I am saying is that whatever the right or left side dependencies are you always can delay their implementation by prioritizing tests and mocks. The use cases are the important thing you need to focus on! Is there a correct order to implement an Hexagonal Architecture?
 
 ## Ports and Adapters Implementation Workflow
@@ -65,30 +62,30 @@ The benefit of "Ports and Adapters" is that the application use cases could be i
 
 > What about the driving actors? When should I implement them?
 
-(first step)
+![First Step](/static/hexagonal-architecture/guided-by-tests-1.png)
 
 The **first driving adapter** you should implement are the **Test Harness**. And to run tests you don't need an user inteface, see how you don't need to worry about button colors and font faces? These tests will guide the use case implementation against a mocked database.
 
-(second step)
+![Second Step](/static/hexagonal-architecture/guided-by-tests-2.png)
 
 With the knowledge acquired by the unit tests implementation you can more confident design the **User Interface** then get user feedback. Every stage is a learning process, be open to change the use cases implementation and test harness at anytime!
 
-(third step)
+![Third Step](/static/hexagonal-architecture/guided-by-tests-3.png)
 
 You now can go deeper in details and implement how the application consume the database, and you can run your existing tests against this secondary actor. Should I say that you will do small changes in the application use cases to support this new adapter? You will!
 
-(fourty step)
+![Final Step](/static/hexagonal-architecture/guided-by-tests-4.png)
 
 The last step you run the **User Interface** against a real database implementation and get more feedback!
 
 ### Optional Acceptance Tests
 
-You may be wondering about testing the User Interface. You are right, you could design the user interface guided by Acceptance Tests. These tests will only ensure the required info.
+We could create tests for the User Interface. Considering that you followed the previous steps.
 
 ## Why TDD is Agile?
 
-Agile methodology is not about doing things quickly without quality. When designing tests you may feel that you are wasting time and that is the opposite:
-
+Agile methodology is not about doing things quickly without quality. When designing tests you may feel that you are wasting time and in reality is the opposite:
+ç
 > The only way to go fast is to go well. Every time you yeild to the temptation to trade quality for speed, you slow down. Every time. Uncle Bob.
 
 Software should be implemented incrementally and on every sprint you should acquire business knowleadge that help you be effective on the next sprint.
