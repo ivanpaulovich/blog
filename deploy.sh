@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#git rm -r public
+#rm -rf .git/modules/public
+#git submodule add -b master git@github.com:ivanpaulovich/ivanpaulovich.github.io.git public
+
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Build the project.
