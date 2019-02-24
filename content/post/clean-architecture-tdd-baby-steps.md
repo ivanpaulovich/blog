@@ -85,7 +85,7 @@ We could create tests for the User Interface. Considering that you followed the 
 ## Why TDD is Agile?
 
 Agile methodology is not about doing things quickly without quality. When designing tests you may feel that you are wasting time and in reality is the opposite:
-ç
+
 > The only way to go fast is to go well. Every time you yeild to the temptation to trade quality for speed, you slow down. Every time. Uncle Bob.
 
 Software should be implemented incrementally and on every sprint you should acquire business knowleadge that help you be effective on the next sprint.
