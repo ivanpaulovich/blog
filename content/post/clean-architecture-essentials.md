@@ -12,6 +12,8 @@ We usually see Software Architecture descriptions like "The software architectur
 
 Secondly, I will distill the Clean Architecture Principles.
 
+{% youtube hZGF6RHrr8o %}
+
 ## Architecture is About Usage
 
 By a quick look at the following blueprint, you can easily guess it is for a church, a theater or a place that people can gather together. Mostly because there is an open space with many benches focused on the same direction, big doors so a large number of people can enter and leave quickly.
@@ -474,3 +476,7 @@ To make it short, at the end a Console UI and a Storage to GitHub gist was good 
 * Defer decisions by implementing the simplest component first.
 
 The [source code is on GitHub](https://github.com/ivanpaulovich/clean-architecture-manga) and it is updated frequently with new videos and pull-requests. Check it out!
+
+{% github ivanpaulovich/clean-architecture-manga %}
+
+{% slideshare lRAYzRzIGiJOZw %}
