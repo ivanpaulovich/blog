@@ -1,8 +1,8 @@
 ---
 title: Clean Architecture Essentials
 published: false
-description: 
-tags:
+description: We usually see Software Architecture descriptions like "The software architecture is an ASP.NET Web API with Entity Framework Core and SQL Server". Let's see how to describe software by the use cases instead of layers and the frameworks it uses and distill the Clean Architecture Principles.
+tags: CleanArchitecture, TDD
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/m11qhdil54qh8tx8xp6h.png
 ---
 
