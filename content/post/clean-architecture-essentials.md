@@ -1,8 +1,8 @@
 ---
 title: Clean Architecture Essentials
 published: false
-description: 
-tags:
+description: We usually see Software Architecture descriptions like "The software architecture is an ASP.NET Web API with Entity Framework Core and SQL Server". Let's see how to describe software by the use cases instead of layers and the frameworks it uses and distill the Clean Architecture Principles.
+tags: CleanArchitecture, TDD
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/m11qhdil54qh8tx8xp6h.png
 ---
 
@@ -11,6 +11,8 @@ cover_image: https://thepracticaldev.s3.amazonaws.com/i/m11qhdil54qh8tx8xp6h.png
 We usually see Software Architecture descriptions like "The software architecture is an ASP.NET Web API with Entity Framework Core and SQL Server". This article explains why you should describe software by the use cases instead of layers and the frameworks it uses.
 
 Secondly, I will distill the Clean Architecture Principles.
+
+{% youtube hZGF6RHrr8o %}
 
 ## Architecture is About Usage
 
@@ -22,7 +24,7 @@ It is not a house blueprint, right?
 
 > The challenge in software design is to scream the use cases in source code in a way that the first look tells us what the software does instead of frameworks that it is made of.
 
-The default approach of software development is to prioritize the frameworks and technology details. An e-commerce and a trading website will look the same, scream Web at you, Model-View-Controller and framework building blocks.
+The default approach of software development is to prioritize the frameworks and technology details. An e-commerce website will scream Web at you, Model-View-Controller or any other framework building blocks.
 
 Could we design the software in a different way? Let's introduce Clean Architecture.
 
@@ -309,25 +311,34 @@ Keep in mind that you should embrace the change because in the future you will f
 
 > Decoupling the User Interface is equally important than decoupling Repositories and Services but we usually don't put much effort into it. This practice leads to Controllers that look like God classes, hard to test and to maintain.
 
-Suppose that you have a GetAccountDetailsUseCase. For the User Interface Layer it should display the Account Details or Not Found, where does this logic be implemented? Here comes the `Presenter` pattern.
+Suppose that you have a GetAccountDetailsUseCase. It should display one of the following options:
 
-The pseudo-code should look like:
+1. The Account Details.
+1. Not Found in case it does not exits.
+
+The initial code should look like:
 
 ```c#
-
-public IActionResult GetAccountDetails(int customerId)
+public async Task<IActionResult> Get([FromRoute][Required] GetAccountDetailsRequest request)
 {
-    useCase.GetAccountDetails(customerId);
-    return presenter.ViewModel;
+    var input = new GetAccountDetailsInput(request.AccountId);
+    try
+    {
+        var output = await _useCase.Execute(input);
+        return Ok(output);
+    }
+    catch (AccountNotFoundException ex)
+    {
+        return NotFound(ex.Message);
+    }
 }
-
 ```
 
-It's explicitly here that the Controller should not care about the UseCase output, these responsibility is delegated to the Presenter.
+I wish that the Controller does not know about the output message to decide which View to return. Let's delegate these responsibility to the Presenter.
 
 ![User Interface](https://thepracticaldev.s3.amazonaws.com/i/2f0srp30n1sqdedkeu7p.png)
 
-Both `Controller` and `UseCase` implementations uses the same `Presenter` instance, so we can have an Action that looks like:
+Both `Controller` and `UseCase` implementations uses the same `Presenter` instance. The Controller does not know about the output message, so we can have an Action that looks like:
 
 ```c#
 /// <summary>
@@ -336,21 +347,15 @@ Both `Controller` and `UseCase` implementations uses the same `Presenter` instan
 [HttpGet("{AccountId}", Name = "GetAccount")]
 [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetAccountDetailsResponse))]
 [ProducesResponseType(StatusCodes.Status404NotFound)]
-[ProducesResponseType(StatusCodes.Status400BadRequest)]
-[ProducesResponseType(StatusCodes.Status500InternalServerError)]
 public async Task<IActionResult> Get([FromRoute][Required] GetAccountDetailsRequest request)
 {
     var input = new GetAccountDetailsInput(request.AccountId);
-    await _mediator.PublishAsync(input);
+    await _useCase.Execute(input);
     return _presenter.ViewModel;
 }
 ```
 
-You notice that I added the `mediator` instance to decouple the Controller and the `UseCase`, it means that the Controller will produce messages, give them to the mediator then the mediator will deliver the message to the appropriate UseCase. Of course, you can invoke the UseCase directly, verify whats works best for your project.
-
-By definition the Output messages given by the UseCase are a consistent and immutable objects, it uses Value Objects to describe the business state.
-
-So the Presenter is in charge of translating the Value Objects into a WebApi response. Fortunately the Value Objects exposes a `ToDecimal()` or `ToString()` methods which converts it into primitive types.
+The Presenter is in charge of translating the Value Objects into a WebApi response. Fortunately the Value Objects exposes a `ToDecimal()` or `ToString()` methods which converts it into primitive types.
 
 The `GetAccountDetailsPresenter` implements both `NotFound` and `Standard` methods mimicking the StdOut and StdErr from Unix. These methods creates the ViewModel object.
 
@@ -430,9 +435,36 @@ public sealed class GetAccountDetails : IUseCase, IUseCaseV2
 }
 ```
 
+## Adding a Mediator
+
+```c#
+/// <summary>
+/// Get an account details
+/// </summary>
+[HttpGet("{AccountId}", Name = "GetAccount")]
+[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetAccountDetailsResponse))]
+[ProducesResponseType(StatusCodes.Status404NotFound)]
+public async Task<IActionResult> Get([FromRoute][Required] GetAccountDetailsRequest request)
+{
+    var input = new GetAccountDetailsInput(request.AccountId);
+    await _mediator.PublishAsync(input);
+    return _presenter.ViewModel;
+}
+```
+
+You notice that I added the `mediator` instance to decouple the Controller and the `UseCase`, it means that the Controller will produce messages, give them to the mediator then the mediator will deliver the message to the appropriate UseCase. Of course, you can invoke the UseCase directly, verify whats works best for your project.
+
+By definition the Output messages given by the UseCase are a consistent and immutable objects, it uses Value Objects to describe the business state.
+
 # Evolutionary Architecture
 
+All developers will build a Task List app at least once. As a .NET Developer we always start thinking by creating an WebApi first then dig into the business details, for this sample application I wanted to proceed differently.
+
 ![Todo Use Cases](https://thepracticaldev.s3.amazonaws.com/i/p0djcfppl8rg337xecvm.png)
+
+I started the development from the Unit Tests, implementing the Use Cases independently and for each dependency creating a Fake. After a while I decided to create a SQL Server database because that is what .NET Developers do, we spin up a SQL Server so we can persist taks ;)
+
+To make it short, at the end a Console UI and a Storage to GitHub gist was good enough for me.
 
 ![Evolutionary Architecture](https://thepracticaldev.s3.amazonaws.com/i/16lvcpag4bddy0dcgcih.png)
 
@@ -444,3 +476,7 @@ public sealed class GetAccountDetails : IUseCase, IUseCaseV2
 * Defer decisions by implementing the simplest component first.
 
 The [source code is on GitHub](https://github.com/ivanpaulovich/clean-architecture-manga) and it is updated frequently with new videos and pull-requests. Check it out!
+
+{% github ivanpaulovich/clean-architecture-manga %}
+
+{% slideshare lRAYzRzIGiJOZw %}
