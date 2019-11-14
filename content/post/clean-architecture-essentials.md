@@ -20,9 +20,9 @@ By a quick look at the following blueprint, you can easily guess it is for a chu
 
 It is not a house blueprint, right?
 
-> The challenge in software design is to scream the use cases in source code in a way that the first look tells us what the software does instead of the frameworks it was made.
+> The challenge in software design is to scream the use cases in source code in a way that the first look tells us what the software does instead of frameworks that it is made of.
 
-The default approach of software development is to prioritize the frameworks and technology details. An e-commerce website will scream Web at you, Model-View-Controller or any other framework building blocks.
+The default approach of software development is to prioritize the frameworks and technology details. An e-commerce and a trading website will look the same, scream Web at you, Model-View-Controller and framework building blocks.
 
 Could we design the software in a different way? Let's introduce Clean Architecture.
 
